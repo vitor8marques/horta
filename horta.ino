@@ -6,10 +6,10 @@ DS1307 rtc(A4, A5);
 
 #include <Servo.h>
 
-Servo myservo;  // create servo object to control a servo
+Servo myservo;  // cria o objeto para controle do servo
 // twelve servo objects can be created on most boards
 
-int pos = 0;    // variable to store the servo position
+int pos = 0; //variavel para armazenar a posição do servo
 int regado=0;
 int menu=1;//variavel da tela do menu
 String R1="10:00:00",R2="16:00:00";
@@ -20,6 +20,7 @@ void setup()
   
   //As linhas abaixo setam a data e hora do modulo
   //e podem ser comentada apos a primeira utilizacao
+  
   //rtc.setDOW(FRIDAY);      //Define o dia da semana
   //rtc.setTime(18,37, 25);     //Define o horario
  // rtc.setDate(6, 7, 2018);   //Define o dia, mes e ano
@@ -31,12 +32,6 @@ void setup()
   Serial.begin(9600);
   pinMode(A0,OUTPUT);
 
- /* digitalWrite(A0,1);
-  myservo.attach(9);
-  molhar(1);
-  myservo.detach();
-  digitalWrite(A0,0); 
-  */
 }
 
 void loop()
@@ -118,28 +113,28 @@ delay(5000);
   }
 void molhar(int ciclos){
 
-    digitalWrite(A0,1);
+    digitalWrite(A0,1);//liga a agua
   myservo.attach(9);
 
  int j=0;
  for(j=0;j<ciclos;j++){
 
-  for (pos = 20; pos <= 90; pos += 1) { // goes from 0 degrees to 180 degrees
+  for (pos = 20; pos <= 90; pos += 1) { // faz o servo girar para molhar as plantas
     // in steps of 1 degree
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(23);                       // waits 15ms for the servo to reach the position
+    myservo.write(pos);              
+    delay(23);                       
   }
   
-  for (pos = 90; pos >= 20; pos -= 1) { // goes from 180 degrees to 0 degrees
-    myservo.write(pos);              // tell servo to go to position in variable 'pos'
-    delay(23);                       // waits 15ms for the servo to reach the position
+  for (pos = 90; pos >= 20; pos -= 1) { // faz o servo girar para molhar as plantas
+    myservo.write(pos);              
+    delay(23);                      
   }
 
   
  
 
  }
-   myservo.detach();
-  regado=1;
-   digitalWrite(A0,0); 
+   myservo.detach();//desliga o servo
+  regado=1;//indica qeu as plantas foram regadas
+   digitalWrite(A0,0); //desliga a água
 }
